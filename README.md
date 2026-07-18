@@ -11,12 +11,15 @@
 
 **Repositorio académico con las actividades, talleres, tareas y proyectos del curso de Desarrollo Móvil.**
 
+[![Última actualización](https://img.shields.io/badge/Última%20actualización-17%20de%20julio%20de%202026-FF6B35?style=for-the-badge)](./README.md#-última-actualización)
+
 </div>
 
 ---
 
 ## 📑 Tabla de contenidos
 
+- [Última actualización](#-última-actualización)
 - [Presentación](#-presentación)
 - [Descripción del curso](#-descripción-del-curso)
 - [Estructura del portafolio](#-estructura-del-portafolio)
@@ -24,6 +27,26 @@
 - [Tecnologías y herramientas](#-tecnologías-y-herramientas)
 - [Competencias desarrolladas](#-competencias-desarrolladas)
 - [Conclusión del curso](#-conclusión-del-curso)
+
+---
+
+## 🔄 Última actualización
+
+| Detalle | Información |
+|---------|-------------|
+| **Fecha** | Viernes, 17 de julio de 2026 — 9:06 p.m. (UTC−5) |
+| **Versión** | `portafoliov2` |
+| **Tipo de cambio** | Incorporación del proyecto semestral al portafolio |
+
+### Cambios realizados
+
+- ✅ Se agregó la carpeta **[13. Proyecto Semestral](./13.%20Proyecto%20Semestral/)** con el proyecto **Quickvnt**
+- ✅ App Android completa para gestión de eventos MICE (asistentes, organizadores y staff)
+- ✅ Backend en **FastAPI** con autenticación, eventos, tickets QR y check-in
+- ✅ Documentación técnica, capturas, videos demo y arquitectura del sistema
+- ✅ Actualización del **README** principal del portafolio
+
+> 📌 **Quickvnt** es la entrega más reciente del repositorio e integra todo lo aprendido en el curso: Compose, MVVM, navegación, consumo de API REST, QR y roles de usuario.
 
 ---
 
@@ -76,7 +99,8 @@ Portafolio-Manuel Guillén-Desarrollo-Movil/
 ├── 9. Investigación system design...pdf → Investigación de System Design
 ├── 10. Texttospeech/                    → App Text-to-Speech
 ├── 11. Parcial #2.png                   → Evidencia — Parcial #2
-└── 12. App de gestion de tareas/        → Proyecto final + documentación
+├── 12. App de gestion de tareas/        → App de tareas + documentación
+└── 13. Proyecto Semestral/              → Quickvnt (Android + Backend) ⭐ Nuevo
 ```
 
 ---
@@ -108,7 +132,8 @@ Portafolio-Manuel Guillén-Desarrollo-Movil/
 | **9** | [Investigación System Design](./9.%20Investigación%20system%20design%20Manuel%20Guillen%20(1).pdf) | Documento de investigación sobre principios de diseño de sistemas aplicados al desarrollo móvil. | Investigación |
 | **10** | [Text-to-Speech](./10.%20Texttospeech/) | Conversor de texto a voz con selección de idioma/voz y reproducción mediante la API nativa de Android. | Jetpack Compose, TextToSpeech API |
 | **11** | [Parcial #2](./11.%20Parcial%20%232.png) | Evidencia de la segunda evaluación parcial del curso. | — |
-| **12** | [App de Gestión de Tareas](./12.%20App%20de%20gestion%20de%20tareas/) | **Proyecto final:** aplicación completa para administrar tareas, con documentación técnica y demo en video. | Android, Documentación |
+| **12** | [App de Gestión de Tareas](./12.%20App%20de%20gestion%20de%20tareas/) | Aplicación para administrar tareas, con documentación técnica y demo en video. | Android, Documentación |
+| **13** | [Proyecto Semestral — Quickvnt](./13.%20Proyecto%20Semestral/) | **Proyecto semestral:** plataforma móvil de gestión de eventos MICE con app Android, backend FastAPI, tickets QR, check-in y panel de organizador. | Kotlin, Compose, MVVM, FastAPI, REST |
 
 ---
 
@@ -151,7 +176,7 @@ Los talleres prácticos —como el de **LazyColumn**, el juego de **adivinar nú
 
 Las evaluaciones (**Quiz**, **Ahorcado** y **Parcial #2**) pusieron a prueba la capacidad de implementar lógica de negocio bajo restricciones de tiempo, y la **investigación de System Design** amplió la visión más allá del código, considerando escalabilidad y buenas prácticas de arquitectura.
 
-El **proyecto final de gestión de tareas** fue la síntesis de todo lo aprendido: diseño, implementación, documentación y demostración de una app completa lista para ser presentada.
+El **proyecto final de gestión de tareas** y, más recientemente, **Quickvnt** (proyecto semestral) fueron la síntesis de todo lo aprendido: diseño, implementación, integración con backend, documentación y demostración de aplicaciones completas listas para ser presentadas.
 
 En conclusión, este curso me proporcionó una base sólida para continuar desarrollando aplicaciones móviles profesionales. Las habilidades adquiridas —desde Kotlin hasta Jetpack Compose, pasando por MVVM y servicios del sistema— son directamente aplicables en entornos de desarrollo real. Quedo motivado para profundizar en temas como persistencia avanzada, testing, publicación en Play Store y arquitecturas más robustas como Clean Architecture.
 
@@ -160,6 +185,8 @@ En conclusión, este curso me proporcionó una base sólida para continuar desar
 <div align="center">
 
 **Manuel Guillén** · Desarrollo Móvil · 2026
+
+*Última actualización: 17 de julio de 2026*
 
 *Portafolio académico — Todos los derechos reservados.*
 
