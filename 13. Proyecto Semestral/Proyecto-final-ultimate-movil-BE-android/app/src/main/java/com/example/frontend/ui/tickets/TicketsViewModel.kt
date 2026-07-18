@@ -1,0 +1,158 @@
+package com.example.frontend.ui.tickets
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.frontend.data.dto.EventResponse
+import com.example.frontend.data.dto.TicketResponse
+import com.example.frontend.data.repository.AuthRepository
+import com.example.frontend.data.repository.EventRepository
+import com.example.frontend.data.repository.TicketRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+
+data class TicketsUiState(
+    val isLoading: Boolean = false,
+    val tickets: List<TicketResponse> = emptyList(),
+    val eventsById: Map<String, EventResponse> = emptyMap(),
+    val selectedTicket: TicketResponse? = null,
+    val selectedEvent: EventResponse? = null,
+    val eventForRegistration: EventResponse? = null,
+    val registrationSuccess: Boolean = false,
+    val error: String? = null
+)
+
+class TicketsViewModel(
+    private val ticketRepository: TicketRepository,
+    private val eventRepository: EventRepository,
+    private val authRepository: AuthRepository
+) : ViewModel() {
+
+    private val _uiState = MutableStateFlow(TicketsUiState())
+    val uiState: StateFlow<TicketsUiState> = _uiState.asStateFlow()
+
+    fun loadMyTickets() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+            val session = authRepository.sessionFlow.first()
+            if (session == null) {
+                _uiState.value = TicketsUiState(
+                    error = "Debes iniciar sesión para ver tus boletos"
+                )
+                return@launch
+            }
+
+            ticketRepository.myTickets()
+                .onSuccess { tickets ->
+                    val eventsById = mutableMapOf<String, EventResponse>()
+                    tickets.map { it.eventId }.distinct().forEach { eventId ->
+                        eventRepository.getEvent(eventId)
+                            .onSuccess { event -> eventsById[eventId] = event }
+                    }
+                    _uiState.value = TicketsUiState(
+                        tickets = tickets,
+                        eventsById = eventsById
+                    )
+                }
+                .onFailure {
+                    _uiState.value = TicketsUiState(error = it.message ?: "Error al cargar boletos")
+                }
+        }
+    }
+
+    fun loadTicket(ticketId: String) {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+            val session = authRepository.sessionFlow.first()
+            if (session == null) {
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    error = "Debes iniciar sesión para ver este boleto"
+                )
+                return@launch
+            }
+
+            val tickets = ticketRepository.myTickets().getOrNull().orEmpty()
+
+            ticketRepository.getTicket(ticketId)
+                .onSuccess { ticket ->
+                    eventRepository.getEvent(ticket.eventId)
+                        .onSuccess { event ->
+                            _uiState.value = _uiState.value.copy(
+                                isLoading = false,
+                                tickets = tickets,
+                                selectedTicket = ticket,
+                                selectedEvent = event
+                            )
+                        }
+                        .onFailure {
+                            _uiState.value = _uiState.value.copy(
+                                isLoading = false,
+                                tickets = tickets,
+                                selectedTicket = ticket,
+                                selectedEvent = null,
+                                error = it.message ?: "Error al cargar evento"
+                            )
+                        }
+                }
+                .onFailure {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = it.message ?: "Error al cargar ticket"
+                    )
+                }
+        }
+    }
+
+    fun loadEventForRegistration(eventId: String) {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+            eventRepository.getEvent(eventId)
+                .onSuccess { event ->
+                    _uiState.value = _uiState.value.copy(isLoading = false, eventForRegistration = event)
+                }
+                .onFailure {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = it.message ?: "Error al cargar evento"
+                    )
+                }
+        }
+    }
+
+    fun registerToEvent(eventId: String, formResponse: Map<String, Any?>) {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null, registrationSuccess = false)
+            val session = authRepository.sessionFlow.first()
+            if (session == null) {
+                _uiState.value = _uiState.value.copy(
+                    isLoading = false,
+                    error = "Debes iniciar sesión para registrarte"
+                )
+                return@launch
+            }
+
+            ticketRepository.registerToEvent(eventId, formResponse)
+                .onSuccess { ticket ->
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        selectedTicket = ticket,
+                        selectedEvent = _uiState.value.eventForRegistration,
+                        registrationSuccess = true
+                    )
+                }
+                .onFailure {
+                    _uiState.value = _uiState.value.copy(
+                        isLoading = false,
+                        error = it.message ?: "Error al registrarse"
+                    )
+                }
+        }
+    }
+
+    fun clearRegistrationSuccess() {
+        _uiState.value = _uiState.value.copy(registrationSuccess = false)
+    }
+}

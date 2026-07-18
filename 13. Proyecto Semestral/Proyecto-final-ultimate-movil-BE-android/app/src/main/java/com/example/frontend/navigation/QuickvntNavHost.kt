@@ -1,0 +1,322 @@
+package com.example.frontend.navigation
+
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Event
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarDefaults
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import com.example.frontend.core.quickvntViewModel
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.frontend.ui.analytics.AnalyticsScreen
+import com.example.frontend.ui.auth.AuthViewModel
+import com.example.frontend.ui.auth.LoginScreen
+import com.example.frontend.ui.auth.RegisterScreen
+import com.example.frontend.ui.checkin.QrScannerScreen
+import com.example.frontend.ui.marketplace.EventDetailScreen
+import com.example.frontend.ui.marketplace.MarketplaceScreen
+import com.example.frontend.ui.organizer.CreateEventScreen
+import com.example.frontend.ui.organizer.EditEventScreen
+import com.example.frontend.ui.organizer.MyEventsScreen
+import com.example.frontend.ui.profile.ProfileScreen
+import com.example.frontend.ui.staff.ManageStaffScreen
+import com.example.frontend.ui.staff.StaffEventsScreen
+import com.example.frontend.ui.splash.SplashScreen
+import com.example.frontend.ui.splash.WelcomeScreen
+import com.example.frontend.ui.tickets.MyTicketsScreen
+import com.example.frontend.ui.tickets.RegisterEventScreen
+import com.example.frontend.ui.tickets.TicketDetailScreen
+import com.example.frontend.ui.theme.CoinbaseCanvas
+import com.example.frontend.ui.theme.CoinbaseInk
+import com.example.frontend.ui.theme.CoinbaseMuted
+import com.example.frontend.ui.theme.CoinbasePrimary
+import com.example.frontend.ui.theme.CoinbaseSurfaceStrong
+
+private sealed class BottomTab(val route: String, val label: String) {
+    data object Home : BottomTab(Routes.MARKETPLACE, "Descubrir")
+    data object Tickets : BottomTab(Routes.MY_TICKETS, "Boletos")
+    data object MyEvents : BottomTab(Routes.MY_EVENTS, "Mis Eventos")
+    data object StaffEvents : BottomTab(Routes.STAFF_EVENTS, "Mis Eventos")
+    data object Profile : BottomTab(Routes.PROFILE, "Perfil")
+}
+
+@Composable
+fun QuickvntNavHost(
+    navController: NavHostController = rememberNavController(),
+    authViewModel: AuthViewModel = quickvntViewModel()
+) {
+    val session by authViewModel.session.collectAsState()
+
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    val showBottomBar = session != null && currentRoute in setOf(
+        Routes.MARKETPLACE,
+        Routes.MY_TICKETS,
+        Routes.MY_EVENTS,
+        Routes.STAFF_EVENTS,
+        Routes.PROFILE
+    )
+
+    Scaffold(
+        containerColor = CoinbaseCanvas,
+        bottomBar = {
+            if (showBottomBar && session != null) {
+                val tabs = when {
+                    session!!.isOrganizer -> listOf(BottomTab.MyEvents, BottomTab.Home, BottomTab.Profile)
+                    session!!.isStaff -> listOf(BottomTab.StaffEvents, BottomTab.Profile)
+                    else -> listOf(BottomTab.Home, BottomTab.Tickets, BottomTab.Profile)
+                }
+
+                NavigationBar(
+                    containerColor = CoinbaseCanvas,
+                    tonalElevation = NavigationBarDefaults.Elevation
+                ) {
+                    tabs.forEach { tab ->
+                        NavigationBarItem(
+                            selected = when (tab) {
+                                BottomTab.Home -> currentRoute == Routes.MARKETPLACE
+                                else -> currentRoute == tab.route
+                            },
+                            onClick = {
+                                navController.navigate(tab.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            },
+                            colors = NavigationBarItemDefaults.colors(
+                                selectedIconColor = CoinbasePrimary,
+                                selectedTextColor = CoinbasePrimary,
+                                unselectedIconColor = CoinbaseMuted,
+                                unselectedTextColor = CoinbaseMuted,
+                                indicatorColor = CoinbaseSurfaceStrong
+                            ),
+                            icon = {
+                                Icon(
+                                    imageVector = when (tab) {
+                                        BottomTab.Home -> Icons.Default.Home
+                                        BottomTab.Tickets -> Icons.Default.Event
+                                        BottomTab.MyEvents -> Icons.Default.Event
+                                        BottomTab.StaffEvents -> Icons.Default.Event
+                                        BottomTab.Profile -> Icons.Default.Person
+                                    },
+                                    contentDescription = tab.label
+                                )
+                            },
+                            label = { Text(tab.label) }
+                        )
+                    }
+                }
+            }
+        }
+    ) { padding ->
+        NavHost(
+            navController = navController,
+            startDestination = Routes.SPLASH,
+            modifier = Modifier.padding(padding)
+        ) {
+            composable(Routes.SPLASH) {
+                SplashScreen(
+                    onFinished = {
+                        val destination = if (session != null) {
+                            Routes.homeForRole(session!!.role)
+                        } else {
+                            Routes.WELCOME
+                        }
+                        navController.navigate(destination) {
+                            popUpTo(Routes.SPLASH) { inclusive = true }
+                        }
+                    }
+                )
+            }
+
+            composable(Routes.WELCOME) {
+                WelcomeScreen(
+                    onGetStarted = {
+                        navController.navigate(Routes.LOGIN) {
+                            popUpTo(Routes.WELCOME) { inclusive = true }
+                        }
+                    }
+                )
+            }
+
+            composable(Routes.LOGIN) {
+                LoginScreen(
+                    onNavigateRegister = { navController.navigate(Routes.REGISTER) },
+                    onLoginSuccess = { role ->
+                        navController.navigate(Routes.homeForRole(role)) {
+                            popUpTo(Routes.LOGIN) { inclusive = true }
+                        }
+                    }
+                )
+            }
+
+            composable(Routes.REGISTER) {
+                RegisterScreen(
+                    onNavigateLogin = { navController.popBackStack() },
+                    onRegisterSuccess = { role ->
+                        navController.navigate(Routes.homeForRole(role)) {
+                            popUpTo(Routes.LOGIN) { inclusive = true }
+                        }
+                    }
+                )
+            }
+
+            composable(Routes.MARKETPLACE) {
+                MarketplaceScreen(
+                    onEventClick = { eventId ->
+                        navController.navigate(Routes.eventDetail(eventId))
+                    }
+                )
+            }
+
+            composable(
+                route = Routes.EVENT_DETAIL,
+                arguments = listOf(navArgument("eventId") { type = NavType.StringType })
+            ) { backStack ->
+                val eventId = backStack.arguments?.getString("eventId").orEmpty()
+                EventDetailScreen(
+                    eventId = eventId,
+                    isOrganizer = session?.isOrganizer == true,
+                    onRegisterClick = { navController.navigate(Routes.registerEvent(eventId)) },
+                    onAnalyticsClick = { navController.navigate(Routes.analytics(eventId)) },
+                    onScanClick = { navController.navigate(Routes.qrScanner(eventId)) },
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable(
+                route = Routes.REGISTER_EVENT,
+                arguments = listOf(navArgument("eventId") { type = NavType.StringType })
+            ) { backStack ->
+                val eventId = backStack.arguments?.getString("eventId").orEmpty()
+                RegisterEventScreen(
+                    eventId = eventId,
+                    onSuccess = {
+                        navController.navigate(Routes.MY_TICKETS) {
+                            popUpTo(Routes.MARKETPLACE) { inclusive = false }
+                        }
+                    },
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable(Routes.MY_TICKETS) {
+                MyTicketsScreen(
+                    onTicketClick = { ticketId ->
+                        navController.navigate(Routes.ticketDetail(ticketId))
+                    }
+                )
+            }
+
+            composable(
+                route = Routes.TICKET_DETAIL,
+                arguments = listOf(navArgument("ticketId") { type = NavType.StringType })
+            ) { backStack ->
+                val ticketId = backStack.arguments?.getString("ticketId").orEmpty()
+                TicketDetailScreen(
+                    ticketId = ticketId,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable(Routes.MY_EVENTS) {
+                MyEventsScreen(
+                    onCreateEvent = { navController.navigate(Routes.CREATE_EVENT) },
+                    onEditEvent = { eventId -> navController.navigate(Routes.editEvent(eventId)) },
+                    onAnalytics = { eventId -> navController.navigate(Routes.analytics(eventId)) },
+                    onScan = { eventId -> navController.navigate(Routes.qrScanner(eventId)) },
+                    onManageStaff = { eventId -> navController.navigate(Routes.manageStaff(eventId)) }
+                )
+            }
+
+            composable(Routes.STAFF_EVENTS) {
+                StaffEventsScreen(
+                    onScan = { eventId -> navController.navigate(Routes.qrScanner(eventId)) }
+                )
+            }
+
+            composable(
+                route = Routes.MANAGE_STAFF,
+                arguments = listOf(navArgument("eventId") { type = NavType.StringType })
+            ) { backStack ->
+                val eventId = backStack.arguments?.getString("eventId").orEmpty()
+                ManageStaffScreen(
+                    eventId = eventId,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable(Routes.CREATE_EVENT) {
+                CreateEventScreen(
+                    onBack = { navController.popBackStack() },
+                    onCreated = { navController.popBackStack() }
+                )
+            }
+
+            composable(
+                route = Routes.EDIT_EVENT,
+                arguments = listOf(navArgument("eventId") { type = NavType.StringType })
+            ) { backStack ->
+                val eventId = backStack.arguments?.getString("eventId").orEmpty()
+                EditEventScreen(
+                    eventId = eventId,
+                    onBack = { navController.popBackStack() },
+                    onSaved = { navController.popBackStack() }
+                )
+            }
+
+            composable(
+                route = Routes.ANALYTICS,
+                arguments = listOf(navArgument("eventId") { type = NavType.StringType })
+            ) { backStack ->
+                val eventId = backStack.arguments?.getString("eventId").orEmpty()
+                AnalyticsScreen(
+                    eventId = eventId,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable(
+                route = Routes.QR_SCANNER,
+                arguments = listOf(navArgument("eventId") { type = NavType.StringType })
+            ) { backStack ->
+                val eventId = backStack.arguments?.getString("eventId").orEmpty()
+                QrScannerScreen(
+                    eventId = eventId,
+                    onBack = { navController.popBackStack() }
+                )
+            }
+
+            composable(Routes.PROFILE) {
+                ProfileScreen(
+                    onLogout = {
+                        navController.navigate(Routes.LOGIN) {
+                            popUpTo(0) { inclusive = true }
+                        }
+                    }
+                )
+            }
+        }
+    }
+}

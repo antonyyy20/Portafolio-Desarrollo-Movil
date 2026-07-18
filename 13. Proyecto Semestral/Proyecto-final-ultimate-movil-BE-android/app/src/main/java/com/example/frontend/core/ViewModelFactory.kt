@@ -1,0 +1,59 @@
+package com.example.frontend.core
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.frontend.QuickvntApplication
+import com.example.frontend.ui.analytics.AnalyticsViewModel
+import com.example.frontend.ui.auth.AuthViewModel
+import com.example.frontend.ui.checkin.CheckinViewModel
+import com.example.frontend.ui.marketplace.MarketplaceViewModel
+import com.example.frontend.ui.organizer.OrganizerViewModel
+import com.example.frontend.ui.staff.StaffEventsViewModel
+import com.example.frontend.ui.staff.StaffManagementViewModel
+import com.example.frontend.ui.tickets.TicketsViewModel
+
+class QuickvntViewModelFactory(
+    private val container: AppContainer
+) : ViewModelProvider.Factory {
+
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return when {
+            modelClass.isAssignableFrom(AuthViewModel::class.java) ->
+                AuthViewModel(container.authRepository) as T
+            modelClass.isAssignableFrom(MarketplaceViewModel::class.java) ->
+                MarketplaceViewModel(container.eventRepository) as T
+            modelClass.isAssignableFrom(TicketsViewModel::class.java) ->
+                TicketsViewModel(
+                    container.ticketRepository,
+                    container.eventRepository,
+                    container.authRepository
+                ) as T
+            modelClass.isAssignableFrom(OrganizerViewModel::class.java) ->
+                OrganizerViewModel(container.eventRepository, container.authRepository) as T
+            modelClass.isAssignableFrom(CheckinViewModel::class.java) ->
+                CheckinViewModel(container.ticketRepository) as T
+            modelClass.isAssignableFrom(AnalyticsViewModel::class.java) ->
+                AnalyticsViewModel(container.ticketRepository) as T
+            modelClass.isAssignableFrom(StaffEventsViewModel::class.java) ->
+                StaffEventsViewModel(container.eventRepository) as T
+            modelClass.isAssignableFrom(StaffManagementViewModel::class.java) ->
+                StaffManagementViewModel(container.eventRepository) as T
+            else -> throw IllegalArgumentException("Unknown ViewModel: ${modelClass.name}")
+        }
+    }
+}
+
+@Composable
+fun quickvntViewModelFactory(): QuickvntViewModelFactory {
+    val app = LocalContext.current.applicationContext as QuickvntApplication
+    return QuickvntViewModelFactory(app.container)
+}
+
+@Composable
+inline fun <reified VM : ViewModel> quickvntViewModel(): VM {
+    return viewModel(factory = quickvntViewModelFactory())
+}
