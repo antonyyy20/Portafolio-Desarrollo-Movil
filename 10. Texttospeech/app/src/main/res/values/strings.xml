@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">texttospeech</string>
+    <string name="app_title">Texto a voz</string>
+    <string name="text_hint">Escribe tu texto</string>
+    <string name="text_placeholder">Introduce el texto que quieres escuchar…</string>
+    <string name="voice_label">Voz</string>
+    <string name="voice_loading">Cargando voces…</string>
+    <string name="play_button">Reproducir audio</string>
+    <string name="students_label">Estudiantes</string>
+    <string name="student_enrique_fong">Enrique Fong</string>
+    <string name="student_manuel_guillen">Manuel Guillen</string>
+</resources>

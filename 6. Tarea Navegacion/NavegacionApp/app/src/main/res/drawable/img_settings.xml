@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp" android:height="120dp" android:viewportWidth="120" android:viewportHeight="120">
+    <!-- Fondo círculo lila claro -->
+    <path android:fillColor="#EDD9FF"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+    <!-- Engranaje grande (morado) -->
+    <path android:fillColor="#9C44DD"
+        android:pathData="M46,28 L50,20 L54,28 L62,26 L64,34 L72,36 L70,44 L78,48 L74,56 L80,62 L74,68 L78,76 L70,80 L72,88 L64,90 L62,98 L54,96 L50,104 L46,96 L38,98 L36,90 L28,88 L30,80 L22,76 L26,68 L20,62 L26,56 L22,48 L30,44 L28,36 L36,34 L38,26Z"/>
+    <!-- Centro engranaje grande (hueco) -->
+    <path android:fillColor="#EDD9FF"
+        android:pathData="M60,62m-16,0a16,16 0,1 1,32 0a16,16 0,1 1,-32 0"/>
+    <!-- Centro punto morado -->
+    <path android:fillColor="#9C44DD"
+        android:pathData="M60,62m-6,0a6,6 0,1 1,12 0a6,6 0,1 1,-12 0"/>
+    <!-- Engranaje pequeño (verde) arriba derecha -->
+    <path android:fillColor="#58CC02"
+        android:pathData="M88,22 L90,17 L92,22 L97,21 L98,26 L103,28 L101,33 L106,36 L103,40 L106,44 L101,47 L103,52 L98,54 L97,59 L92,58 L90,63 L88,58 L83,59 L82,54 L77,52 L79,47 L74,44 L77,40 L74,36 L79,33 L77,28 L82,26 L83,21Z"/>
+    <!-- Centro engranaje pequeño -->
+    <path android:fillColor="#EDD9FF"
+        android:pathData="M90,40m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"/>
+    <path android:fillColor="#58CC02"
+        android:pathData="M90,40m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+</vector>

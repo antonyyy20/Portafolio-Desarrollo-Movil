@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Backgrounds -->
+    <color name="background_primary">#FFFFFF</color>
+    <color name="background_secondary">#F4F2EB</color>
+
+    <!-- Text -->
+    <color name="text_primary">#1A1A18</color>
+    <color name="text_secondary">#5F5E5A</color>
+    <color name="text_tertiary">#888780</color>
+    <color name="white">#FFFFFF</color>
+
+    <!-- Borders -->
+    <color name="border_tertiary">#E0DED6</color>
+    <color name="border_secondary">#C8C6BE</color>
+
+    <!-- Accent -->
+    <color name="accent_primary">#185FA5</color>
+
+    <!-- Hint states -->
+    <color name="hint_neutral">#F4F2EB</color>
+    <color name="hint_higher">#E1F5EE</color>  <!-- verde suave → subir -->
+    <color name="hint_lower">#FAECE7</color>   <!-- coral suave → bajar -->
+    <color name="hint_win">#EAF3DE</color>     <!-- verde ganador -->
+    <color name="hint_lose">#FCEBEB</color>    <!-- rojo perder -->
+
+    <!-- Colores semánticos -->
+    <color name="color_win">#0F6E56</color>
+    <color name="color_lose">#993C1D</color>
+    <color name="color_higher">#085041</color>
+    <color name="color_lower">#993C1D</color>
+
+    <!-- Dots -->
+    <color name="dot_idle_bg">#F4F2EB</color>
+    <color name="dot_idle_text">#888780</color>
+    <color name="dot_active_bg">#E6F1FB</color>
+    <color name="dot_active_text">#185FA5</color>
+    <color name="dot_win_bg">#E1F5EE</color>
+    <color name="dot_win_text">#0F6E56</color>
+    <color name="dot_fail_bg">#FAECE7</color>
+    <color name="dot_fail_text">#993C1D</color>
+</resources>

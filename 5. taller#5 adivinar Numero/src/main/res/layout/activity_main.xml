@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    activity_main.xml
+    Layout principal del juego "Adivina el Número"
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_primary"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- ══ CABECERA ══════════════════════════════════════════════════════ -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TALLER ANDROID · KOTLIN"
+            android:textSize="10sp"
+            android:letterSpacing="0.15"
+            android:textColor="@color/text_tertiary"
+            android:gravity="center"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adivina el Número"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:gravity="center"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Del 1 al 100 — tienes 3 intentos"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- ══ CRONÓMETRO ════════════════════════════════════════════════════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_background"
+            android:padding="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TIEMPO"
+                android:textSize="10sp"
+                android:letterSpacing="0.15"
+                android:textColor="@color/text_tertiary"/>
+
+            <TextView
+                android:id="@+id/tvTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:textColor="@color/text_primary"/>
+        </LinearLayout>
+
+        <!-- ══ DOTS DE INTENTOS ══════════════════════════════════════════════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/dot1"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:text="1"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:background="@drawable/dot_active"
+                android:textColor="@color/dot_active_text"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/dot2"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:text="2"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:background="@drawable/dot_idle"
+                android:textColor="@color/dot_idle_text"
+                android:layout_marginEnd="8dp"/>
+
+            <TextView
+                android:id="@+id/dot3"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:text="3"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:background="@drawable/dot_idle"
+                android:textColor="@color/dot_idle_text"/>
+        </LinearLayout>
+
+        <!-- ══ CARD DE HINT ══════════════════════════════════════════════════ -->
+        <TextView
+            android:id="@+id/tvHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="¡Adivina el número secreto!"
+            android:textSize="15sp"
+            android:textColor="@color/text_primary"
+            android:padding="16dp"
+            android:background="@drawable/hint_neutral"
+            android:layout_marginBottom="12dp"
+            android:lineSpacingExtra="4dp"/>
+
+        <!-- ══ RANGO ACTIVO ═══════════════════════════════════════════════════ -->
+        <TextView
+            android:id="@+id/tvRango"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rango: 1 – 100"
+            android:textSize="13sp"
+            android:textColor="@color/text_secondary"
+            android:fontFamily="monospace"
+            android:background="@drawable/card_background"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- ══ INPUT + BOTÓN VALIDAR ══════════════════════════════════════════ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="4dp">
+
+            <!-- Solo acepta números (inputType="number") -->
+            <EditText
+                android:id="@+id/etNumero"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:inputType="number"
+                android:hint="???"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:background="@drawable/input_background"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_tertiary"
+                android:maxLength="3"
+                android:imeOptions="actionDone"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnValidar"
+                android:layout_width="wrap_content"
+                android:layout_height="56dp"
+                android:text="Validar"
+                android:textSize="15sp"
+                android:backgroundTint="@color/accent_primary"
+                android:textColor="@color/white"
+                android:paddingHorizontal="20dp"/>
+        </LinearLayout>
+
+        <!-- ══ NÚMERO SECRETO (visible al perder) ════════════════════════════ -->
+        <TextView
+            android:id="@+id/tvNumeroSecreto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/color_lose"
+            android:gravity="center"
+            android:padding="12dp"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"/>
+
+        <!-- ══ BOTÓN NUEVA PARTIDA ════════════════════════════════════════════ -->
+        <Button
+            android:id="@+id/btnNuevo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nueva Partida"
+            android:textSize="14sp"
+            android:backgroundTint="@color/background_secondary"
+            android:textColor="@color/text_primary"
+            android:enabled="false"
+            android:layout_marginTop="12dp"/>
+
+        <!-- ══ SECCIÓN RANKING ════════════════════════════════════════════════ -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RANKING"
+            android:textSize="11sp"
+            android:letterSpacing="0.12"
+            android:textColor="@color/text_tertiary"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="10dp"/>
+
+        <ListView
+            android:id="@+id/lvRanking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:divider="@color/border_tertiary"
+            android:dividerHeight="0.5dp"/>
+
+        <TextView
+            android:id="@+id/tvEmptyRanking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aún no hay puntajes. ¡Juega para aparecer aquí!"
+            android:textSize="13sp"
+            android:textColor="@color/text_tertiary"
+            android:gravity="center"
+            android:padding="16dp"/>
+
+    </LinearLayout>
+</ScrollView>

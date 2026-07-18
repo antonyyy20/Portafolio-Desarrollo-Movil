@@ -1,0 +1,58 @@
+[
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/drawable_img_settings.xml.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/drawable/img_settings.xml"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/drawable_img_trophy.xml.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/drawable/img_trophy.xml"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/drawable_img_profile.xml.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/drawable/img_profile.xml"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/drawable_img_rocket.xml.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/drawable/img_rocket.xml"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.ingeniero.navegacionapp-merged_res-51:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.ingeniero.navegacionapp-main-53:/mipmap-xhdpi/ic_launcher.png"
+    }
+]

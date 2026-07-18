@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp" android:height="120dp" android:viewportWidth="120" android:viewportHeight="120">
+    <!-- Fondo círculo verde claro -->
+    <path android:fillColor="#D7F5B1"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+    <!-- Fuego -->
+    <path android:fillColor="#FF9600"
+        android:pathData="M52,88 Q60,100 68,88 Q64,92 60,90 Q56,92 52,88Z"/>
+    <!-- Cuerpo del cohete -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M45,55 Q45,42 60,38 Q75,42 75,55 L75,85 Q75,90 60,90 Q45,90 45,85Z"/>
+    <!-- Punta verde -->
+    <path android:fillColor="#58CC02"
+        android:pathData="M60,25 L45,55 L75,55Z"/>
+    <!-- Ventana azul -->
+    <path android:fillColor="#1CB0F6"
+        android:pathData="M60,62m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"/>
+    <!-- Ventana brillo -->
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.6"
+        android:pathData="M55,58m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0"/>
+    <!-- Aleta izquierda -->
+    <path android:fillColor="#45A800"
+        android:pathData="M45,72 L32,88 L45,88Z"/>
+    <!-- Aleta derecha -->
+    <path android:fillColor="#45A800"
+        android:pathData="M75,72 L88,88 L75,88Z"/>
+</vector>

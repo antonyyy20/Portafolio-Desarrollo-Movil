@@ -1,0 +1,28 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp" android:height="120dp" android:viewportWidth="120" android:viewportHeight="120">
+    <!-- Fondo círculo azul claro -->
+    <path android:fillColor="#CCEEFD"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+    <!-- Cuerpo -->
+    <path android:fillColor="#1CB0F6"
+        android:pathData="M25,105 Q25,78 60,78 Q95,78 95,105Z"/>
+    <!-- Cabeza -->
+    <path android:fillColor="#FFDEB4"
+        android:pathData="M60,45m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0"/>
+    <!-- Cabello -->
+    <path android:fillColor="#3C3C3C"
+        android:pathData="M38,40 Q38,22 60,20 Q82,22 82,40 Q82,30 60,28 Q38,30 38,40Z"/>
+    <!-- Ojo izquierdo -->
+    <path android:fillColor="#3C3C3C"
+        android:pathData="M50,45m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+    <!-- Ojo derecho -->
+    <path android:fillColor="#3C3C3C"
+        android:pathData="M70,45m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+    <!-- Sonrisa -->
+    <path android:fillColor="#00000000" android:strokeColor="#FF9600"
+        android:strokeWidth="2.5" android:strokeLineCap="round"
+        android:pathData="M50,54 Q60,62 70,54"/>
+    <!-- Estrella decorativa -->
+    <path android:fillColor="#FF9600"
+        android:pathData="M90,28 L92,34 L98,34 L93,38 L95,44 L90,40 L85,44 L87,38 L82,34 L88,34Z"/>
+</vector>

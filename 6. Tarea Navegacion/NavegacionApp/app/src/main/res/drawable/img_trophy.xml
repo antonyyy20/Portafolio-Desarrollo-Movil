@@ -1,0 +1,31 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp" android:height="120dp" android:viewportWidth="120" android:viewportHeight="120">
+    <!-- Fondo círculo amarillo claro -->
+    <path android:fillColor="#FFF3CC"
+        android:pathData="M60,60m-55,0a55,55 0,1 1,110 0a55,55 0,1 1,-110 0"/>
+    <!-- Base -->
+    <path android:fillColor="#FF9600"
+        android:pathData="M36,100 L84,100 Q86,100 86,102 L86,106 Q86,108 84,108 L36,108 Q34,108 34,106 L34,102 Q34,100 36,100Z"/>
+    <!-- Pedestal -->
+    <path android:fillColor="#FFBB44"
+        android:pathData="M50,85 L70,85 L70,100 L50,100Z"/>
+    <!-- Asa izquierda -->
+    <path android:fillColor="#FF9600" android:fillAlpha="0.6"
+        android:pathData="M32,38 Q18,38 18,55 Q18,72 32,72 L32,38Z"/>
+    <!-- Asa derecha -->
+    <path android:fillColor="#FF9600" android:fillAlpha="0.6"
+        android:pathData="M88,38 Q102,38 102,55 Q102,72 88,72 L88,38Z"/>
+    <!-- Copa -->
+    <path android:fillColor="#FFD900"
+        android:pathData="M32,25 L88,25 L80,85 L40,85Z"/>
+    <!-- Brillo copa -->
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.35"
+        android:pathData="M38,30 L50,30 L46,75 L38,75Z"/>
+    <!-- Estrella central -->
+    <path android:fillColor="#FFFFFF" android:fillAlpha="0.95"
+        android:pathData="M60,42 L63,52 L74,52 L65,58 L68,68 L60,62 L52,68 L55,58 L46,52 L57,52Z"/>
+    <!-- Borde copa -->
+    <path android:fillColor="#00000000" android:strokeColor="#FF9600"
+        android:strokeWidth="1.5"
+        android:pathData="M32,25 L88,25 L80,85 L40,85Z"/>
+</vector>

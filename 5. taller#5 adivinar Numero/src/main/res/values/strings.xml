@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Adivina el Número</string>
+    <string name="listo">¡Adivina el número secreto!</string>
+    <string name="validar">Validar</string>
+    <string name="nueva_partida">Nueva Partida</string>
+    <string name="hint_mayor">⬆️ %1$d es demasiado BAJO.\nEl número secreto es MAYOR.\nBusca entre %2$d y %3$d.\n%4$s</string>
+    <string name="hint_menor">⬇️ %1$d es demasiado ALTO.\nEl número secreto es MENOR.\nBusca entre %2$d y %3$d.\n%4$s</string>
+    <string name="hint_win">🏆 ¡Correcto! El número era %1$d.\nLo adivinaste en %2$d intento(s) — %3$s</string>
+    <string name="hint_lose">💀 Sin más intentos. El número secreto era %1$d.</string>
+    <string name="intento_restante_uno">⚠️ ¡Solo te queda 1 intento más!</string>
+    <string name="intentos_restantes">Te quedan %1$d intentos.</string>
+    <string name="ultimo_intento">¡Este era tu último intento!</string>
+    <string name="ingresa_nombre">¿Con qué nombre quieres aparecer en el ranking?</string>
+    <string name="guardar">Guardar</string>
+    <string name="sin_guardar">Sin guardar</string>
+    <string name="empty_ranking">Aún no hay puntajes. ¡Juega para aparecer aquí!</string>
+</resources>
