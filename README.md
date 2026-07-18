@@ -28,27 +28,6 @@
 - [Competencias desarrolladas](#-competencias-desarrolladas)
 - [Conclusión del curso](#-conclusión-del-curso)
 
----
-
-## 🔄 Última actualización
-
-| Detalle | Información |
-|---------|-------------|
-| **Fecha** | Viernes, 17 de julio de 2026 — 9:06 p.m. (UTC−5) |
-| **Versión** | `portafoliov2` |
-| **Tipo de cambio** | Incorporación del proyecto semestral al portafolio |
-
-### Cambios realizados
-
-- ✅ Se agregó la carpeta **[13. Proyecto Semestral](./13.%20Proyecto%20Semestral/)** con el proyecto **Quickvnt**
-- ✅ App Android completa para gestión de eventos MICE (asistentes, organizadores y staff)
-- ✅ Backend en **FastAPI** con autenticación, eventos, tickets QR y check-in
-- ✅ Documentación técnica, capturas, videos demo y arquitectura del sistema
-- ✅ Actualización del **README** principal del portafolio
-
-> 📌 **Quickvnt** es la entrega más reciente del repositorio e integra todo lo aprendido en el curso: Compose, MVVM, navegación, consumo de API REST, QR y roles de usuario.
-
----
 
 ## 👋 Presentación
 
